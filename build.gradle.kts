@@ -86,7 +86,8 @@ dependencies {
     // =========================
     // RATE LIMITING
     // =========================
-    implementation("com.bucket4j:bucket4j-core:8.14.0")
+    // Source: https://mvnrepository.com/artifact/com.bucket4j/bucket4j_jdk17-core
+    implementation("com.bucket4j:bucket4j_jdk17-core:8.19.0")
 
     // =========================
     // MAPPING & LOMBOK
@@ -127,6 +128,7 @@ dependencies {
     testImplementation("org.springframework.security:spring-security-test")
 
     // Testcontainers
+    testImplementation(platform("org.testcontainers:testcontainers-bom:1.20.4"))
     testImplementation("org.testcontainers:junit-jupiter")
     testImplementation("org.testcontainers:postgresql")
     testImplementation("org.testcontainers:mongodb")

@@ -1,0 +1,66 @@
+version: '3.9'
+
+services:
+
+  postgres:
+    image: postgres:16-alpine
+    container_name: omnidex-postgres
+
+    environment:
+      POSTGRES_DB: omnidex
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+
+    ports:
+      - "5432:5432"
+
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  redis:
+    image: redis:7-alpine
+    container_name: omnidex-redis
+
+    ports:
+      - "6379:6379"
+
+    volumes:
+      - redis_data:/data
+
+  mongo:
+    image: mongo:8
+    container_name: omnidex-mongo
+
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: root
+
+    ports:
+      - "27017:27017"
+
+    volumes:
+      - mongo_data:/data/db
+
+  backend:
+    build: .
+
+    container_name: omnidex-backend
+
+    depends_on:
+      - postgres
+      - redis
+      - mongo
+
+    ports:
+      - "8080:8080"
+
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+
+    env_file:
+      - .env
+
+volumes:
+  postgres_data:
+  redis_data:
+  mongo_data:

@@ -19,3 +19,11 @@ app-logs-folder/
 # 5. Chặn các file chứa mật khẩu bí mật ở máy local của bạn
 .env
 *.local
+
+.gradle
+build
+out
+.idea
+.git
+README.md
+Dockerfile
