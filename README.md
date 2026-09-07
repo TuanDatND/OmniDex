@@ -1,2 +1,1 @@
-# OmniDex.
-# NguyenDinhTuanDat
+
